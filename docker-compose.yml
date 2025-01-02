@@ -1,0 +1,24 @@
+services:
+  redis:
+    image: redis
+    container_name: redis_cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+  inference_service:
+    build: .
+    container_name: inference_service
+    ports:
+      - "8000:8000"
+    environment:
+      - MODEL_PATH=/app/model_artifact/_model_artifact.json
+      - CACHE_PATH=/app/data/_venue_preparation.csv
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+    depends_on:
+      - redis
+
+volumes:
+  redis_data:
