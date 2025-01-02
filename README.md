@@ -4,18 +4,19 @@
 
 This project implements a RESTful inference service to predict delivery times for orders based on provided order information and venue characteristics. The service is built using FastAPI and employs Redis for caching venue preparation times. The model used is an XGBoost regressor trained on relevant features.
 
+---
 Full description of the task:
-```
+
 You are given a toy dataset, a model training script and a trained model checkpoint. The dataset contains orders information and their corresponding delivery time.
 The training script (i) takes the two datasets (orders_data.csv - dataset which contains orders information and venue_preparation.csv - a dataset with some characteristics of the venue) and (ii) trains an XGBoost model using the following features: is_retail, avg_preparation_time and the hour of day the order was received. You do not need to run this script, it is here to provide information on how the attached model was trained.
 Your goal is to implement the remaining essential step: serving the model in  for real time inference.
+
 Sub-tasks:
 - Implement an inference service: REST-service that (i) takes in relevant information about an order in the input request (features from orders_data.csv file), (ii) validates the input request, (iii) adds features from a cache (features from venue_preparation.csv), (iv) does a prediction using these features and the model artifact provided in the zip file and (v) returns the predicted delivery time for this order.
 - Inference service and cache are packed in docker containers and composed together.
 - Assume that this model will be used to predict delivery times in real time, so choose the model and frameworks accordingly.
 - Add tests (full coverage isn't mandatory)
 - Add a README that includes information about how to run the app, an explanation of the end-to-end system, future improvements to the solution and examples for the service request and response.
-```
 
 ## Project Structure
 
@@ -84,7 +85,6 @@ inference_service
     Response
 
     ```json
-    Copy code
     {
         "delivery_duration": 18.370149612426758
     }
